@@ -21,6 +21,8 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         movementSpeed = enemyData.shipSpeed;
+        leftBoundary = enemyData.leftBound;
+        rightBoundary = enemyData.rightBound;
     }
 
     private void FixedUpdate()
@@ -66,7 +68,7 @@ public class EnemyMovement : MonoBehaviour
                     // After completing the circle, move downward in a straight line
                     pos.y -= movementSpeed * Time.fixedDeltaTime;
                     // Reset rotation to face upwards after completing the circle
-                    transform.rotation = Quaternion.Euler(0, 0, 90); // Reset rotation to face upwards
+                    transform.rotation = Quaternion.Euler(0, 0, 180); // Reset rotation to face upwards
                 }
                 break;
 

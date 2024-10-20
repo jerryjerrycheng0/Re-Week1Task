@@ -15,3 +15,6 @@ MonoBehaviour:
   shipSprite: {fileID: -1432650945, guid: 0cdc11648b682ce44b238fd9d78bb1b5, type: 3}
   shipSpeed: 3
   shipHP: 1
+  movementType: 1
+  leftBound: {fileID: 0}
+  rightBound: {fileID: 0}
