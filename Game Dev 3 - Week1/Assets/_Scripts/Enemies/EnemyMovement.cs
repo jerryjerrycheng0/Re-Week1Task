@@ -20,14 +20,19 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        movementSpeed = enemyData.shipSpeed;
-        leftBoundary = enemyData.leftBound;
-        rightBoundary = enemyData.rightBound;
+        if (enemyData != null)
+        {
+            movementSpeed = enemyData.shipSpeed; // Assign speed from EnemyData
+        }
+        else
+        {
+            Debug.LogError("EnemyData is not assigned!");
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!GameManager.isGameOn) return;
+        if (!GameManager.isGameOn) return; // Only move if the game is active
         Movement();
     }
 
@@ -40,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
         switch (enemyData.movementType)
         {
             case EnemyData.MovementType.Straight:
-                pos.y -= movementSpeed * Time.fixedDeltaTime;
+                pos.y -= movementSpeed * Time.fixedDeltaTime; // Move straight down
                 break;
 
             case EnemyData.MovementType.Circular:
@@ -67,8 +72,8 @@ public class EnemyMovement : MonoBehaviour
                 {
                     // After completing the circle, move downward in a straight line
                     pos.y -= movementSpeed * Time.fixedDeltaTime;
-                    // Reset rotation to face upwards after completing the circle
-                    transform.rotation = Quaternion.Euler(0, 0, 180); // Reset rotation to face upwards
+                    // Reset rotation to face downwards after completing the circle
+                    transform.rotation = Quaternion.Euler(0, 0, 180); // Reset rotation to face downwards
                 }
                 break;
 
@@ -82,6 +87,7 @@ public class EnemyMovement : MonoBehaviour
         // Get the bounds of the left and right boundary GameObjects
         if (leftBoundary != null && rightBoundary != null)
         {
+            // Calculate the left and right bounds based on the colliders
             float leftBound = leftBoundary.transform.position.x - (leftBoundary.GetComponent<BoxCollider2D>().size.x / 2);
             float rightBound = rightBoundary.transform.position.x + (rightBoundary.GetComponent<BoxCollider2D>().size.x / 2);
 

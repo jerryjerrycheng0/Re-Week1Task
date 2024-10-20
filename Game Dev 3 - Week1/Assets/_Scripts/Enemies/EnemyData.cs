@@ -16,6 +16,4 @@ public class EnemyData : ScriptableObject
         Sway
     }
     public MovementType movementType;
-    public GameObject leftBound;
-    public GameObject rightBound;
 }
