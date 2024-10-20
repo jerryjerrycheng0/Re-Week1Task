@@ -9,4 +9,11 @@ public class EnemyData : ScriptableObject
     public Sprite shipSprite;
     public float shipSpeed;
     public int shipHP;
+    public enum MovementType
+    {
+        Straight,
+        Circular,
+        Sway
+    }
+    public MovementType movementType;
 }
