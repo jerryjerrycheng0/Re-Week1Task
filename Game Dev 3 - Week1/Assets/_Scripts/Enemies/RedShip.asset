@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8e2fa50894e2340a0cdb0b56b9a98d, type: 3}
+  m_Name: RedShip
+  m_EditorClassIdentifier: 
+  shipSprite: {fileID: 1445330413, guid: 0cdc11648b682ce44b238fd9d78bb1b5, type: 3}
+  shipSpeed: 1
+  shipHP: 10
