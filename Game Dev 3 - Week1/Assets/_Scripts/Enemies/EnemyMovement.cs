@@ -49,32 +49,7 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case EnemyData.MovementType.Circular:
-                if (!isCircleComplete)
-                {
-                    elapsedTime += Time.fixedDeltaTime;
-
-                    // Move in a circular pattern while descending
-                    pos.x += Mathf.Cos(elapsedTime * movementSpeed) * circularRadius * Time.fixedDeltaTime; // Circular horizontal movement
-                    pos.y += (Mathf.Sin(elapsedTime * movementSpeed) * circularRadius - movementSpeed) * Time.fixedDeltaTime; // Circular vertical movement and descent
-
-                    // Rotate the sprite to ensure it faces upwards
-                    float angle = Mathf.Atan2(Mathf.Sin(elapsedTime * movementSpeed), Mathf.Cos(elapsedTime * movementSpeed)) * Mathf.Rad2Deg + 90; // +90 degrees to face upwards
-                    transform.rotation = Quaternion.Euler(0, 0, angle);
-
-                    // Check if the circle is complete
-                    if (elapsedTime >= 2 * Mathf.PI)
-                    {
-                        isCircleComplete = true; // Mark the circle as complete
-                        elapsedTime = 0f; // Reset elapsedTime for potential future use
-                    }
-                }
-                else
-                {
-                    // After completing the circle, move downward in a straight line
-                    pos.y -= movementSpeed * Time.fixedDeltaTime;
-                    // Reset rotation to face downwards after completing the circle
-                    transform.rotation = Quaternion.Euler(0, 0, 180); // Reset rotation to face downwards
-                }
+                pos = CircularMovement(pos);
                 break;
 
             case EnemyData.MovementType.Sway:
@@ -84,6 +59,43 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
 
+        Boundaries(pos);
+    }
+
+    private Vector2 CircularMovement(Vector2 pos)
+    {
+        if (!isCircleComplete)
+        {
+            elapsedTime += Time.fixedDeltaTime;
+
+            // Move in a circular pattern while descending
+            pos.x += Mathf.Cos(elapsedTime * movementSpeed) * circularRadius * Time.fixedDeltaTime; // Circular horizontal movement
+            pos.y += (Mathf.Sin(elapsedTime * movementSpeed) * circularRadius - movementSpeed) * Time.fixedDeltaTime; // Circular vertical movement and descent
+
+            // Rotate the sprite to ensure it faces upwards
+            float angle = Mathf.Atan2(Mathf.Sin(elapsedTime * movementSpeed), Mathf.Cos(elapsedTime * movementSpeed)) * Mathf.Rad2Deg + 90; // +90 degrees to face upwards
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            // Check if the circle is complete
+            if (elapsedTime >= 2 * Mathf.PI)
+            {
+                isCircleComplete = true; // Mark the circle as complete
+                elapsedTime = 0f; // Reset elapsedTime for potential future use
+            }
+        }
+        else
+        {
+            // After completing the circle, move downward in a straight line
+            pos.y -= movementSpeed * Time.fixedDeltaTime;
+            // Reset rotation to face downwards after completing the circle
+            transform.rotation = Quaternion.Euler(0, 0, 180); // Reset rotation to face downwards
+        }
+
+        return pos;
+    }
+
+    private void Boundaries(Vector2 pos)
+    {
         // Get the bounds of the left and right boundary GameObjects
         if (leftBoundary != null && rightBoundary != null)
         {
