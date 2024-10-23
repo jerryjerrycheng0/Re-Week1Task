@@ -10,7 +10,6 @@ public class EnemyData : ScriptableObject
     public float shipSpeed;
     public int shipHP;
     public float fireRateEnemy;
-    public int damage;
     public GameObject bullet;
     public enum MovementType
     {

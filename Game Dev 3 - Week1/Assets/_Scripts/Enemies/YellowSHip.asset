@@ -16,5 +16,5 @@ MonoBehaviour:
   shipSpeed: 3
   shipHP: 1
   fireRateEnemy: 0.8
-  damage: 1
+  bullet: {fileID: 5703229253066669777, guid: 8a36c05c71e4cc7409028c7b564bded3, type: 3}
   movementType: 1

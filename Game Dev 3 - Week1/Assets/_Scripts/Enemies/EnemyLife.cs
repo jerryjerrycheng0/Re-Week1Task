@@ -11,6 +11,8 @@ public class EnemyLife : MonoBehaviour
     //Ref to the enemy vfx script
     private EnemyVfx enemyVfx;
 
+    private EnemyBulletShredder bulletShredder;
+
     public EnemyData enemyData;
 
     private void Start()
@@ -19,6 +21,7 @@ public class EnemyLife : MonoBehaviour
         firingScriptRef = FindObjectOfType<PlayerFiring>();        
         enemyVfx = GetComponent<EnemyVfx>();
         enemyHp = enemyData.shipHP;
+        bulletShredder = FindObjectOfType<EnemyBulletShredder>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -32,9 +35,22 @@ public class EnemyLife : MonoBehaviour
             //Will remove life based on the current damage thre player can do
             RemoveHp(firingScriptRef.damageValue);
         }
+
+    }
+    private void OnCollision2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Shredder")
+        {
+            //Will flash
+            StartCoroutine(enemyVfx.HitFlash());
+            //Will destroy the bullet
+            Destroy(other.gameObject);
+            //Will remove life based on the current damage thre player can do
+            RemoveHp(bulletShredder.damageValue);
+        }
     }
 
-    public void RemoveHp(int hpToRemove)
+        public void RemoveHp(int hpToRemove)
     {
         //Destroys the enemyShip if the hit brings it tp 0 or below
         if ((enemyHp - hpToRemove) <= 0)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
 {
-    [SerializeField] int playerHp = 50;
+    [SerializeField] int playerHp;
 
     private PlayerVfx playerVfx;
 
@@ -21,7 +21,6 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyBullet")
         {
-            Debug.Log("Hit");
             //Will flash
             StartCoroutine(playerVfx.HitFlash());
             //Will destroy the bullet
@@ -36,15 +35,18 @@ public class PlayerLife : MonoBehaviour
         // if the hp are at 0 or less
         if ((playerHp - damageValue) <= 0)
         {
+            Debug.Log("Player has " + playerHp + "HP left, Player is ded");
             //By making this bool false the game will stop
             GameManager.isGameOn = false;
             //Destroys the ship
-            Destroy(gameObject);
+            Time.timeScale = 0;
         }
-        else
+        else if ((playerHp - damageValue) > 0 )
         {
+            Debug.Log("The value is" + damageValue);
             //Deals the damage on the player
             playerHp -= damageValue;
+            Debug.Log("Player has " + playerHp + "HP left");
         }
     }
 }

@@ -8,7 +8,6 @@ public class EnemyFiring : MonoBehaviour
     private GameObject bulletPrefab;
     public GameObject muzzleFlashPrefab;
     public Vector2 bulletForce;
-    public int damageValue;
 
     [SerializeField] EnemyData enemyData;
 
@@ -18,7 +17,6 @@ public class EnemyFiring : MonoBehaviour
     void Start()
     {
         fireRate = enemyData.fireRateEnemy;
-        damageValue = enemyData.damage;
 
         bulletPrefab = enemyData.bullet;
     }
