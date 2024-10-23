@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad8e2fa50894e2340a0cdb0b56b9a98d, type: 3}
-  m_Name: YellowShip
+  m_Name: YellowSHip
   m_EditorClassIdentifier: 
   shipSprite: {fileID: -1432650945, guid: 0cdc11648b682ce44b238fd9d78bb1b5, type: 3}
   shipSpeed: 3
   shipHP: 1
+  fireRateEnemy: 0.8
+  damage: 1
   movementType: 1
-  leftBound: {fileID: 0}
-  rightBound: {fileID: 0}

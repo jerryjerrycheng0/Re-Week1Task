@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GreyShip
   m_EditorClassIdentifier: 
   shipSprite: {fileID: -1069922475, guid: 0cdc11648b682ce44b238fd9d78bb1b5, type: 3}
-  shipSpeed: 3
-  shipHP: 5
+  shipSpeed: 4
+  shipHP: 2
+  fireRateEnemy: 1
+  damage: 10
   movementType: 0
-  leftBound: {fileID: 0}
-  rightBound: {fileID: 0}

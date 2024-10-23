@@ -8,8 +8,8 @@ public class EnemyMovement : MonoBehaviour
     public EnemyData enemyData;
 
     // Reference to the left and right boundary GameObjects
-    public GameObject leftBoundary;  // Assign the GameObject with BoxCollider2D in the inspector
-    public GameObject rightBoundary; // Assign the GameObject with BoxCollider2D in the inspector
+    public Collider2D leftBoundary;  // Assign the GameObject with BoxCollider2D in the inspector
+    public Collider2D rightBoundary; // Assign the GameObject with BoxCollider2D in the inspector
 
     // Variables for different movement patterns
     private float circularRadius = 2f;   // Radius for circular movement
@@ -18,22 +18,17 @@ public class EnemyMovement : MonoBehaviour
     private float swayAmplitude = 1f;     // Amplitude for sway movement
     private float swayFrequency = 2f;     // Frequency for sway movement
 
-    private void Start()
-    {
-        if (enemyData != null)
-        {
-            movementSpeed = enemyData.shipSpeed; // Assign speed from EnemyData
-        }
-        else
-        {
-            Debug.LogError("EnemyData is not assigned!");
-        }
-    }
 
     private void FixedUpdate()
     {
         if (!GameManager.isGameOn) return; // Only move if the game is active
+        //To move the ship
         Movement();
+    }
+
+    private void Start()
+    {
+        movementSpeed = enemyData.shipSpeed;
     }
 
     void Movement()
@@ -59,7 +54,7 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
 
-        Boundaries(pos);
+        transform.position = pos;
     }
 
     private Vector2 CircularMovement(Vector2 pos)
@@ -92,25 +87,5 @@ public class EnemyMovement : MonoBehaviour
         }
 
         return pos;
-    }
-
-    private void Boundaries(Vector2 pos)
-    {
-        // Get the bounds of the left and right boundary GameObjects
-        if (leftBoundary != null && rightBoundary != null)
-        {
-            // Calculate the left and right bounds based on the colliders
-            float leftBound = leftBoundary.transform.position.x - (leftBoundary.GetComponent<BoxCollider2D>().size.x / 2);
-            float rightBound = rightBoundary.transform.position.x + (rightBoundary.GetComponent<BoxCollider2D>().size.x / 2);
-
-            // Clamp the x position between the bounds set by the GameObjects
-            pos.x = Mathf.Clamp(pos.x, leftBound, rightBound);
-        }
-
-        // Ensure the ship doesn't move off the bottom of the screen
-        pos.y = Mathf.Clamp(pos.y, -Camera.main.orthographicSize, float.MaxValue);
-
-        // Update the position
-        transform.position = pos;
     }
 }

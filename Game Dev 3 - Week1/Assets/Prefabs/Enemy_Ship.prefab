@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 7551349999887803631}
   - component: {fileID: 4240316038975325271}
   - component: {fileID: 4326780760151960921}
-  m_Layer: 0
+  - component: {fileID: -6332856627697303328}
+  m_Layer: 8
   m_Name: Enemy_Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +35,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.93813, y: 0.93813, z: 0.93813}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7979474079357327161}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &2104808170209892047
@@ -147,6 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 95347929274df464ba8919634735618b, type: 2}
+  leftBoundary: {fileID: 9097715631810296208, guid: fbdd55f57ad1bf14a9f49153e4f8dafd, type: 3}
+  rightBoundary: {fileID: 3846813449304185572, guid: 1d7c7440dcdd4034fa43a62b11a52bfc, type: 3}
 --- !u!114 &7551349999887803631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,3 +192,54 @@ MonoBehaviour:
   hitFlashColor: {r: 1, g: 0.6853579, b: 0, a: 1}
   originalColor: {r: 0, g: 0, b: 0, a: 1}
   hitFlashDuration: 0.5
+--- !u!114 &-6332856627697303328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935348067947489795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8192969a316a44fa99b772bcda70a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPositions:
+  - {fileID: 7979474079357327161}
+  bulletPrefab: {fileID: 5703229253066669777, guid: 4424ab1a3e4e52f49b3d46df6803bc10, type: 3}
+  muzzleFlashPrefab: {fileID: 4599474529932416948, guid: 0b2b2fc2e90b9cc42b481cf48f9d78b4, type: 3}
+  bulletForce: {x: 0, y: -30}
+  damageValue: 0
+  enemyData: {fileID: 11400000, guid: 95347929274df464ba8919634735618b, type: 2}
+  isFiring: 0
+--- !u!1 &7477284615441866518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7979474079357327161}
+  m_Layer: 0
+  m_Name: EnemyGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7979474079357327161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7477284615441866518}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.00000035762784}
+  m_LocalPosition: {x: -0, y: 0.889, z: 0}
+  m_LocalScale: {x: 1.0659504, y: 1.0659504, z: 1.0659504}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3673820599675823642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
