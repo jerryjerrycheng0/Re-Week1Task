@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyLife : MonoBehaviour
 {
     //Default life value
-    private int enemyHp = 1;
+    private int enemyHp;
     //Reference to the player firing script
     private PlayerFiring firingScriptRef;
     //Ref to the enemy vfx script

@@ -10,6 +10,7 @@ public class TitleMover : MonoBehaviour
     public Vector3 punchStrenght;
     public float moveDuration;
     [SerializeField] AudioSource startSound;
+    [SerializeField] AudioSource drumRoll;
 
     GameManager gameManagerScriptReference;
 
@@ -28,6 +29,7 @@ public class TitleMover : MonoBehaviour
     {
         //Wait
         yield return new WaitForSeconds(2f);
+        drumRoll.Play();
         //The title moves down
         transform.DOMove(endPositionTransform.position, moveDuration);
         //Wait

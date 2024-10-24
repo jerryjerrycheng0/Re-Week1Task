@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
 {
-    [SerializeField] int playerHp = 500;
+    public int playerHp;
 
     private PlayerVfx playerVfx;
+
+    public AudioSource playerDed;
+
+    public bool isPlayerDed = false;
+
+    public AudioSource playerHurt;
 
     private void Start()
     {
@@ -43,6 +49,7 @@ public class PlayerLife : MonoBehaviour
 
         // Deduct health and check if the player is dead
         playerHp -= damageValue;
+        playerHurt.Play();
 
         if (playerHp <= 0)
         {
@@ -64,6 +71,8 @@ public class PlayerLife : MonoBehaviour
 
         // Stop the game after the brief delay
         GameManager.isGameOn = false;
+        isPlayerDed = true;
+        playerDed.Play();
         Time.timeScale = 0;
     }
 }

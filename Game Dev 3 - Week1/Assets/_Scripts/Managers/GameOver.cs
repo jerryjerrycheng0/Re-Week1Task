@@ -4,28 +4,46 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] GameObject[] objectsToActivateOnDeath;
-    [SerializeField] AudioSource dedSound;
-        public void Start()
+    [SerializeField] private GameObject[] uiElements;  // Array to hold the UI elements to activate
+    [SerializeField] private AudioSource gameOverSound;  // Reference to the Game Over sound
+
+
+    private PlayerLife playerLife;
+
+     void Start()
+    {
+        // Initially disable all UI elements
+        SetUIActive(false);
+        playerLife = FindObjectOfType<PlayerLife>();
+    }
+
+    public void TriggerGameOver()
+    {
+        if (playerLife.isPlayerDed == true)
         {
-            foreach (var items in objectsToActivateOnDeath)
+            SetUIActive(true);
+
+            // Play the Game Over sound
+            if (gameOverSound != null)
             {
-                items.gameObject.SetActive(false);
-                // Disables the assigned game objects to ensure the UI only appears when the player is spotted
+                gameOverSound.Play();
             }
 
-        }
-
-        // Activates the Game Over UI
-        public void StartGameOver()
-        {
-
-            foreach (var items in objectsToActivateOnDeath)
-            {
-                items.gameObject.SetActive(true);
-                dedSound.Play();
-            }
+            // Unlock the cursor and make it visible
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            // Pause the game
+            Time.timeScale = 0; // Stop the game time
+        }
+    }
+
+    private void SetUIActive(bool isActive)
+    {
+        // Set each UI element active or inactive
+        foreach (GameObject uiElement in uiElements)
+        {
+            uiElement.SetActive(isActive);
+        }
     }
 }

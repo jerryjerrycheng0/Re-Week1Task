@@ -3,70 +3,66 @@ using UnityEngine;
 
 public class EnemyFiring : MonoBehaviour
 {
-    public Transform[] gunPositions;
-    public GameObject bulletPrefab;
-    public GameObject muzzleFlashPrefab;
-    public Vector2 bulletForce;
+    public Transform[] gunPositions;          // Positions from where the enemy shoots
+    public GameObject muzzleFlashPrefab;       // Muzzle flash effect prefab
+    public Vector2 bulletForce;                // Force applied to the bullet when fired
 
-    [SerializeField] EnemyData enemyData;
+    [SerializeField] private EnemyData enemyData; // Reference to the enemy's data
+    [SerializeField] private GameObject bulletPrefab;            // Bullet prefab assigned from EnemyData
 
-    private float fireRate; // Time between shots in seconds
-    public bool isFiring = false; // Track if the enemy is currently firing
+    private float fireRate;                     // Time between shots in seconds
+    private bool isFiring = false;              // Track if the enemy is currently firing
+    public int bulletAttack;
+
+    [SerializeField] private AudioSource shootSound; // Audio source for shooting sound
 
     void Start()
     {
+        // Initialize bullet prefab and fire rate from EnemyData
         fireRate = enemyData.fireRateEnemy;
+        bulletAttack = enemyData.bulletDamage;
+        shootSound = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        // If the game is off, it will not continue the code
-        if (!GameManager.isGameOn) return;
+        if (!GameManager.isGameOn) return; // Check if the game is running
 
         if (!isFiring)
         {
-            StartCoroutine(Shoot());
+            StartCoroutine(Shoot()); // Start the shooting coroutine if not firing
         }
     }
 
     private IEnumerator Shoot()
     {
         isFiring = true; // Set firing flag to true
+        shootSound.Play(); // Play shooting sound
 
-        // The for loop will make sure we can shoot from both locations at once
+        // Loop through all gun positions and fire bullets
         for (int i = 0; i < gunPositions.Length; i++)
         {
-            MuzzleFlash(i);
-            Bullet(i);
+            MuzzleFlash(i); // Show muzzle flash
+            Bullet(i);      // Spawn bullet
         }
 
-        
-        // Wait for the specified fire rate before allowing another shot
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate); // Wait for the specified fire rate
         isFiring = false; // Reset firing flag to allow new shots
-
-
     }
 
     private void Bullet(int arrayIndexNumber)
     {
-        // Spawns the bullet
+        // Spawn the bullet at the gun position
         var spawnedBullet = Instantiate(bulletPrefab, gunPositions[arrayIndexNumber].position, Quaternion.identity);
-
-        // Gets its rigidbody
         Rigidbody2D bulletRb = spawnedBullet.GetComponent<Rigidbody2D>();
-
-        // Adds force to it so it can be actually yeeted away
-        bulletRb.AddForce(bulletForce, ForceMode2D.Impulse);
+        bulletRb.AddForce(bulletForce, ForceMode2D.Impulse); // Apply force to bullet
     }
 
     private void MuzzleFlash(int arrayIndexNumber)
     {
-        // To get a random value so we can use it to give the muzzle flash a random rotation
+        // Generate a random rotation for the muzzle flash
         float randomRotation = Random.Range(0, 360);
-        // Spawns the muzzleflash and stores it into a variable 
         var muzzleFlash = Instantiate(muzzleFlashPrefab, gunPositions[arrayIndexNumber].transform.position, Quaternion.Euler(0, 0, randomRotation));
-        // Destroys the muzzleflash game object since we do not need it anymore
-        Destroy(muzzleFlash, 1f);
+        Destroy(muzzleFlash, 1f); // Destroy muzzle flash after 1 second
     }
 }
