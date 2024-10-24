@@ -172,3 +172,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 2
+  enemyData: {fileID: 11400000, guid: 95347929274df464ba8919634735618b, type: 2}

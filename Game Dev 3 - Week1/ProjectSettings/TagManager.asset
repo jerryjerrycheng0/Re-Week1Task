@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - EnemyBullet
   - Shredder
+  - Enemy
   layers:
   - Default
   - TransparentFX

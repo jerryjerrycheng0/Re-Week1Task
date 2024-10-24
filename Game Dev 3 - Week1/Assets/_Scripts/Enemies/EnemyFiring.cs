@@ -1,32 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyFiring : MonoBehaviour
 {
     public Transform[] gunPositions;
-    private GameObject bulletPrefab;
+    private int bulletHurt;
+    public GameObject bulletPrefab;
     public GameObject muzzleFlashPrefab;
     public Vector2 bulletForce;
 
     [SerializeField] EnemyData enemyData;
 
-    private float fireRate = 0.5f; // Time between shots in seconds
+    private float fireRate; // Time between shots in seconds
     public bool isFiring = false; // Track if the enemy is currently firing
 
     void Start()
     {
         fireRate = enemyData.fireRateEnemy;
-
-        bulletPrefab = enemyData.bullet;
+        bulletHurt = enemyData.bulletDamage; // Assuming this is assigned in the inspector
     }
-    // Update is called once per frame
+
     void Update()
     {
         // If the game is off, it will not continue the code
-        if (GameManager.isGameOn == false) return;
+        if (!GameManager.isGameOn) return;
 
-        if (GameManager.isGameOn == true && !isFiring)
+        if (!isFiring)
         {
             StartCoroutine(Shoot());
         }
@@ -43,18 +42,22 @@ public class EnemyFiring : MonoBehaviour
             Bullet(i);
         }
 
+        
         // Wait for the specified fire rate before allowing another shot
         yield return new WaitForSeconds(fireRate);
-
         isFiring = false; // Reset firing flag to allow new shots
+
+
     }
 
     private void Bullet(int arrayIndexNumber)
     {
         // Spawns the bullet
         var spawnedBullet = Instantiate(bulletPrefab, gunPositions[arrayIndexNumber].position, Quaternion.identity);
+
         // Gets its rigidbody
         Rigidbody2D bulletRb = spawnedBullet.GetComponent<Rigidbody2D>();
+
         // Adds force to it so it can be actually yeeted away
         bulletRb.AddForce(bulletForce, ForceMode2D.Impulse);
     }

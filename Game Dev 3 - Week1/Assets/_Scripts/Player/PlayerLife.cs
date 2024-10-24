@@ -1,53 +1,69 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
 {
-    [SerializeField] int playerHp;
+    [SerializeField] int playerHp = 3;
 
     private PlayerVfx playerVfx;
 
-
-
     private void Start()
     {
-        //Gets the data
+        // Get the VFX component
         playerVfx = FindObjectOfType<PlayerVfx>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "EnemyBullet")
+        // Check if the collision is with an enemy bullet
+        if (collision.gameObject.CompareTag("EnemyBullet"))
         {
-            //Will flash
+            // Disable the bullet's collider and Rigidbody to prevent further interaction
+            Collider2D bulletCollider = collision.gameObject.GetComponent<Collider2D>();
+            Rigidbody2D bulletRb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+            if (bulletCollider != null) bulletCollider.enabled = false;
+            if (bulletRb != null) bulletRb.simulated = false;
+
+            // Log that the player was hit and by which bullet
+
+            // Trigger the hit flash VFX
             StartCoroutine(playerVfx.HitFlash());
-            //Will destroy the bullet
+
+            // Apply damage to the player
+            DealDamage(1);
+
+            // Destroy the bullet
             Destroy(collision.gameObject);
-            //Will remove life based on the current damage each type of ship can do
-            DealDamage(collision.gameObject.GetComponent<EnemyBullet>().bulletDamage);
         }
     }
+
     public void DealDamage(int damageValue)
     {
-        //To dead damege to the player or kill them
-        // if the hp are at 0 or less
-        if ((playerHp - damageValue) <= 0)
+
+        // Deduct health and check if the player is dead
+        playerHp -= damageValue;
+
+        if (playerHp <= 0)
         {
-            Debug.Log("Player has " + playerHp + "HP left, Player is ded");
-            //By making this bool false the game will stop
-            GameManager.isGameOn = false;
-            //Destroys the ship
-            Time.timeScale = 0;
+            Debug.Log("Player has " + playerHp + " HP left. Player is dead.");
+
+            // Ensure the death sequence is delayed slightly to finish all actions
+            StartCoroutine(HandlePlayerDeath());
         }
-        else if ((playerHp - damageValue) > 0 )
+        else if (playerHp > 0)
         {
-            Debug.Log("The value is" + damageValue);
-            //Deals the damage on the player
-            playerHp -= damageValue;
-            Debug.Log("Player has " + playerHp + "HP left");
+            Debug.Log("Player has " + playerHp + " HP left.");
         }
     }
-}
 
+    private IEnumerator HandlePlayerDeath()
+    {
+        // Delay briefly to ensure all logs and VFX can happen before stopping the game
+        yield return new WaitForSeconds(0.1f);
+
+        // Stop the game after the brief delay
+        GameManager.isGameOn = false;
+        Time.timeScale = 0;
+    }
+}

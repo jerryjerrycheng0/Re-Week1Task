@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -6332856627697303328}
   m_Layer: 8
   m_Name: Enemy_Ship
-  m_TagString: EnemyBullet
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPositions:
   - {fileID: 7979474079357327161}
+  bulletPrefab: {fileID: 5703229253066669777, guid: 4424ab1a3e4e52f49b3d46df6803bc10, type: 3}
   muzzleFlashPrefab: {fileID: 4599474529932416948, guid: 0b2b2fc2e90b9cc42b481cf48f9d78b4, type: 3}
   bulletForce: {x: 0, y: -30}
   enemyData: {fileID: 11400000, guid: 95347929274df464ba8919634735618b, type: 2}
