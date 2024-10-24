@@ -9,6 +9,7 @@ public class TitleMover : MonoBehaviour
     public Transform endPositionTransform;
     public Vector3 punchStrenght;
     public float moveDuration;
+    [SerializeField] AudioSource startSound;
 
     GameManager gameManagerScriptReference;
 
@@ -17,8 +18,10 @@ public class TitleMover : MonoBehaviour
     void Start()
     {
         gameManagerScriptReference = FindObjectOfType<GameManager>();
-
+        startSound = GetComponent<AudioSource>();
+        startSound.volume = 0.5f;
         StartCoroutine(TItleAnimation());
+
     }
 
     private IEnumerator TItleAnimation()
@@ -31,6 +34,7 @@ public class TitleMover : MonoBehaviour
         yield return new WaitForSeconds(moveDuration - 0.1f);
         //The tile scale punches for a cool effect
         transform.DOPunchScale(punchStrenght, 1f);
+        startSound.Play();
         //Wait
         yield return new WaitForSeconds(moveDuration);
         //The tile lerps to a scale of 0

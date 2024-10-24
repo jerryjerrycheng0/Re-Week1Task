@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipSprite: {fileID: -1432650945, guid: 0cdc11648b682ce44b238fd9d78bb1b5, type: 3}
   shipSpeed: 3
-  shipHP: 1
+  shipHP: 3
   fireRateEnemy: 0.8
   bullet: {fileID: 5703229253066669777, guid: 8a36c05c71e4cc7409028c7b564bded3, type: 3}
   movementType: 1

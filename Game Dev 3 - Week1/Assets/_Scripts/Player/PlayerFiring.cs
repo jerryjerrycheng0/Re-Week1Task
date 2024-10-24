@@ -9,9 +9,15 @@ public class PlayerFiring : MonoBehaviour
     public GameObject muzzleFlashPrefab;
     public Vector2 bulletForce;
     public int damageValue;
+    [SerializeField] AudioSource shootSound;
 
     public float fireRate = 0.5f; // Time between shots in seconds
     private bool isFiring = false; // Track if the player is currently firing
+
+    void Start()
+    {
+        shootSound = GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,6 +35,8 @@ public class PlayerFiring : MonoBehaviour
     private IEnumerator Shoot()
     {
         isFiring = true; // Set firing flag to true
+
+        shootSound.Play();
 
         // The for loop will make sure we can shoot from both locations at once
         for (int i = 0; i < gunPositions.Length; i++)
