@@ -55,6 +55,10 @@ public class EnemyMovement : MonoBehaviour
         }
 
         transform.position = pos;
+        if (pos.y <= -20f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private Vector2 CircularMovement(Vector2 pos)

@@ -6,11 +6,11 @@ public class EnemyBulletShredder : MonoBehaviour
 {
 
     public int damageValue = 99999;
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.tag == "EnemyBullet" || other.tag == "Enemy")
+        if (collision.tag == "EnemyBullet" || collision.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }
