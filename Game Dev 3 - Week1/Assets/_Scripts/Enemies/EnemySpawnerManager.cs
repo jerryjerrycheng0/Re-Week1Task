@@ -30,7 +30,7 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         for (int i=0; i < numberOfEnemiesSpawned; i++)
         {
-            int randomInteger = Random.Range(0, spawnPoints.Length - 1);
+            int randomInteger = Random.Range(0, spawnPoints.Length);
             GameObject spawnedShip = Instantiate(enemyPrefab, spawnPoints[randomInteger]);
             spawnedShip.GetComponent<EnemyVisual>().enemyData = enemyData[currentWaveCount];
             spawnedShip.GetComponent<EnemyMovement>().enemyData = enemyData[currentWaveCount];

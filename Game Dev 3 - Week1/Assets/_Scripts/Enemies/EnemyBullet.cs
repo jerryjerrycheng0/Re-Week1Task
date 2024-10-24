@@ -5,12 +5,9 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     public int bulletDamage;
-    [SerializeField] EnemyData enemyData;
-
     
     private void Start()
     {
-        bulletDamage = enemyData.bulletDamage;
         // Optionally set a lifespan for bullets
         Destroy(gameObject, 5f); // Destroy bullet after 5 seconds if it doesn't hit anything
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemyFiring : MonoBehaviour
 {
     public Transform[] gunPositions;
-    private int bulletHurt;
     public GameObject bulletPrefab;
     public GameObject muzzleFlashPrefab;
     public Vector2 bulletForce;
@@ -17,7 +16,6 @@ public class EnemyFiring : MonoBehaviour
     void Start()
     {
         fireRate = enemyData.fireRateEnemy;
-        bulletHurt = enemyData.bulletDamage; // Assuming this is assigned in the inspector
     }
 
     void Update()

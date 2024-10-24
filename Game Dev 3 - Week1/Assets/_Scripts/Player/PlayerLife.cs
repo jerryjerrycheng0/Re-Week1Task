@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
 {
-    [SerializeField] int playerHp = 3;
+    [SerializeField] int playerHp = 500;
 
     private PlayerVfx playerVfx;
 
@@ -31,7 +31,7 @@ public class PlayerLife : MonoBehaviour
             StartCoroutine(playerVfx.HitFlash());
 
             // Apply damage to the player
-            DealDamage(1);
+            DealDamage(collision.gameObject.GetComponent<EnemyBullet>().bulletDamage);
 
             // Destroy the bullet
             Destroy(collision.gameObject);
