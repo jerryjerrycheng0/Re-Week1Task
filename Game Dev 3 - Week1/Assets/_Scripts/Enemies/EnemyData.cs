@@ -11,6 +11,7 @@ public class EnemyData : ScriptableObject
     public int shipHP;
     public float fireRateEnemy;
     public int bulletDamage;
+    public GameObject bulletPrefab;
     public enum MovementType
     {
         Straight,

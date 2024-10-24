@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    
+    public int bulletDamage;
+
     private void Start()
     {
         // Optionally set a lifespan for bullets

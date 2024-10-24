@@ -8,11 +8,10 @@ public class EnemyFiring : MonoBehaviour
     public Vector2 bulletForce;                // Force applied to the bullet when fired
 
     [SerializeField] private EnemyData enemyData; // Reference to the enemy's data
-    [SerializeField] private GameObject bulletPrefab;            // Bullet prefab assigned from EnemyData
+    [SerializeField] private GameObject bulletPrefab; // Bullet prefab assigned from EnemyData
 
     private float fireRate;                     // Time between shots in seconds
     private bool isFiring = false;              // Track if the enemy is currently firing
-    public int bulletAttack;
 
     [SerializeField] private AudioSource shootSound; // Audio source for shooting sound
 
@@ -20,7 +19,7 @@ public class EnemyFiring : MonoBehaviour
     {
         // Initialize bullet prefab and fire rate from EnemyData
         fireRate = enemyData.fireRateEnemy;
-        bulletAttack = enemyData.bulletDamage;
+        bulletPrefab = enemyData.bulletPrefab;
         shootSound = GetComponent<AudioSource>();
     }
 
