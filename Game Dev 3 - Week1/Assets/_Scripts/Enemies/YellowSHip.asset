@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: YellowSHip
   m_EditorClassIdentifier: 
   shipSprite: {fileID: -1432650945, guid: 0cdc11648b682ce44b238fd9d78bb1b5, type: 3}
-  shipSpeed: 3
+  shipSpeed: 2
   shipHP: 3
   fireRateEnemy: 0.8
   bulletDamage: 3
