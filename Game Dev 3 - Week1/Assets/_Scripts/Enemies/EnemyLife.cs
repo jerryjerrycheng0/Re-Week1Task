@@ -45,7 +45,7 @@ public class EnemyLife : MonoBehaviour
             StartCoroutine(enemyVfx.HitFlash());
             //Will destroy the bullet
             Destroy(other.gameObject);
-            //Will remove life based on the current damage thre player can do
+            //Ensures the enemy is killed when entering a Bullet Shredder
             RemoveHp(bulletShredder.damageValue);
         }
     }

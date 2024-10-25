@@ -13,10 +13,13 @@ public class PlayerLife : MonoBehaviour
 
     public AudioSource playerHurt;
 
+    GameManager gameManager;
+
     private void Start()
     {
         // Get the VFX component
         playerVfx = FindObjectOfType<PlayerVfx>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,6 +56,8 @@ public class PlayerLife : MonoBehaviour
 
         if (playerHp <= 0)
         {
+            isPlayerDed = true;
+            gameManager.GameOver();
             Debug.Log("Player has " + playerHp + " HP left. Player is dead.");
 
             // Ensure the death sequence is delayed slightly to finish all actions

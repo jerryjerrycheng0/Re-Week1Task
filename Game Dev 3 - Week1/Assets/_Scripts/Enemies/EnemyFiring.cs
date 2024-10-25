@@ -7,15 +7,15 @@ public class EnemyFiring : MonoBehaviour
     public GameObject muzzleFlashPrefab;       // Muzzle flash effect prefab
     public Vector2 bulletForce;                // Force applied to the bullet when fired
 
-    [SerializeField] private EnemyData enemyData; // Reference to the enemy's data
-    [SerializeField] private GameObject bulletPrefab; // Bullet prefab assigned from EnemyData
+    public EnemyData enemyData; // Reference to the enemy's data
+    public GameObject bulletPrefab; // Bullet prefab assigned from EnemyData
 
-    private float fireRate;                     // Time between shots in seconds
+    private float fireRate = 1f;                     // Time between shots in seconds
     private bool isFiring = false;              // Track if the enemy is currently firing
 
     [SerializeField] private AudioSource shootSound; // Audio source for shooting sound
 
-    void Start()
+    private void Start()
     {
         // Initialize bullet prefab and fire rate from EnemyData
         fireRate = enemyData.fireRateEnemy;

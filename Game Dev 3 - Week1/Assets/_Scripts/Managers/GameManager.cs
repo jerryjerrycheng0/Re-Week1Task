@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent gameStarted;
 
-
+    public GameObject gameOverUI;
     public void GameIsOn()
     {
         isGameOn = true;
@@ -23,5 +23,11 @@ public class GameManager : MonoBehaviour
     public void GameIsOff()
     {
         isGameOn = false;
+    }
+
+    public void GameOver()
+    {
+        //Activates the assigned Canvas for the gameover screen
+        gameOverUI.SetActive(true);
     }
 }

@@ -8,5 +8,6 @@ using UnityEngine.SceneManagement;
         public void Restarter()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 1;
         }
     }
