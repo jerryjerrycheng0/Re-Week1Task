@@ -35,6 +35,7 @@ public class EnemySpawnerManager : MonoBehaviour
             spawnedShip.GetComponent<EnemyVisual>().enemyData = enemyData[currentWaveCount];
             spawnedShip.GetComponent<EnemyMovement>().enemyData = enemyData[currentWaveCount];
             spawnedShip.GetComponent<EnemyLife>().enemyData = enemyData[currentWaveCount];
+            spawnedShip.GetComponent<EnemyFiring>().enemyData = enemyData[currentWaveCount];
             yield return new WaitForSeconds(delayBetweenSpawns);
         }
 

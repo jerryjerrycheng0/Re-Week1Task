@@ -11373,6 +11373,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  gameOverUI: {fileID: 291695695}
 --- !u!4 &1971872104
 Transform:
   m_ObjectHideFlags: 0
@@ -11617,7 +11618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33752d5e5544f2d459daebf6c286a9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHp: 20
+  playerHp: 100
   playerDed: {fileID: 1180216215}
   isPlayerDed: 0
   playerHurt: {fileID: 426911712}
