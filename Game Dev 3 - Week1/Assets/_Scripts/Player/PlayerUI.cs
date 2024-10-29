@@ -19,11 +19,11 @@ public class PlayerUI : MonoBehaviour
     {
         if (GameManager.isGameOn == true)
         {
-            playerHP.text = "Player HP: " + playerLife.playerHp;
+            playerHP.text = "Player HP: " + playerLife.playerHp; //Showcases the player's current HP
         }
         else
         {
-            playerHP.text = " ";
+            playerHP.text = " "; //Shows nothing before the game starts
         }
     }
 }

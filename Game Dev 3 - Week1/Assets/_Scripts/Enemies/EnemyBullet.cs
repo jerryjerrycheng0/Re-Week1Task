@@ -8,8 +8,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void Start()
     {
-        // Optionally set a lifespan for bullets
-        Destroy(gameObject, 5f); // Destroy bullet after 5 seconds if it doesn't hit anything
+        Destroy(gameObject, 5f); // Destroy bullet after 5 seconds if it doesn't hit anything to prevent overflow
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -17,7 +16,7 @@ public class EnemyBullet : MonoBehaviour
         if(collision.gameObject.tag == "Bullet")
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            Destroy(gameObject); //Both bullets clashes against each other to prevent damage and unfairness
         }
     }
 }

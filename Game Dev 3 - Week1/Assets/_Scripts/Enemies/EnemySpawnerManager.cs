@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnerManager : MonoBehaviour
 {
 
-    [SerializeField] Transform[] spawnPoints;
+    [SerializeField] Transform[] spawnPoints; //An array of spawning spots
 
     [SerializeField] float delayBetweenSpawns;
 
@@ -30,8 +30,11 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         for (int i=0; i < numberOfEnemiesSpawned; i++)
         {
-            int randomInteger = Random.Range(0, spawnPoints.Length);
+            int randomInteger = Random.Range(0, spawnPoints.Length); //Ensures it spawns in EVERY spot
             GameObject spawnedShip = Instantiate(enemyPrefab, spawnPoints[randomInteger]);
+
+            //Obtains all required data for the enemy ships
+
             spawnedShip.GetComponent<EnemyVisual>().enemyData = enemyData[currentWaveCount];
             spawnedShip.GetComponent<EnemyMovement>().enemyData = enemyData[currentWaveCount];
             spawnedShip.GetComponent<EnemyLife>().enemyData = enemyData[currentWaveCount];

@@ -10,15 +10,15 @@ public class Music : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moosic.pitch = 1f;
-        playerLife = FindObjectOfType<PlayerLife>();
+        moosic.pitch = 1f; //Ensure the music is played normally
+        playerLife = FindObjectOfType<PlayerLife>(); //Obtaining the isPlayerDed boolean value
     }
 
     public void Update()
     {
         if (playerLife.isPlayerDed)
         {
-           moosic.pitch = 0.3f;
+           moosic.pitch = 0.3f; //Lowers the pitch when dead
         }
     }
 
@@ -27,7 +27,7 @@ public class Music : MonoBehaviour
     {
         if (GameManager.isGameOn)
         {
-            moosic.Play();
+            moosic.Play(); //Ensures the music is played AFTER the title is gone
         }
         
 
