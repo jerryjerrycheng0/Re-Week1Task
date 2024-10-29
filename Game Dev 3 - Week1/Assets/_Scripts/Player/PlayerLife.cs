@@ -15,6 +15,7 @@ public class PlayerLife : MonoBehaviour
 
     GameManager gameManager;
 
+
     private void Start()
     {
         // Get the VFX component
@@ -58,14 +59,9 @@ public class PlayerLife : MonoBehaviour
         {
             isPlayerDed = true;
             gameManager.GameOver();
-            Debug.Log("Player has " + playerHp + " HP left. Player is dead.");
 
             // Ensure the death sequence is delayed slightly to finish all actions
             StartCoroutine(HandlePlayerDeath());
-        }
-        else if (playerHp > 0)
-        {
-            Debug.Log("Player has " + playerHp + " HP left.");
         }
     }
 
