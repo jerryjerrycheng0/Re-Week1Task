@@ -13,6 +13,6 @@ public class EnemyVisual : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        spriteRenderer.sprite = enemyData.shipSprite;
+        spriteRenderer.sprite = enemyData.shipSprite; //The appearance of the ship
     }
 }

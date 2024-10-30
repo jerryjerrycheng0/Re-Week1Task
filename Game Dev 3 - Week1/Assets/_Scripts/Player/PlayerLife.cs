@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerLife : MonoBehaviour
 
     GameManager gameManager;
 
+
     private void Start()
     {
         // Get the VFX component
@@ -27,14 +29,12 @@ public class PlayerLife : MonoBehaviour
         // Check if the collision is with an enemy bullet
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
-            // Disable the bullet's collider and Rigidbody to prevent further interaction
+            // Disable the bullet's collider and Rigidbody to prevent endless damage per frame
             Collider2D bulletCollider = collision.gameObject.GetComponent<Collider2D>();
             Rigidbody2D bulletRb = collision.gameObject.GetComponent<Rigidbody2D>();
 
             if (bulletCollider != null) bulletCollider.enabled = false;
             if (bulletRb != null) bulletRb.simulated = false;
-
-            // Log that the player was hit and by which bullet
 
             // Trigger the hit flash VFX
             StartCoroutine(playerVfx.HitFlash());
@@ -50,7 +50,7 @@ public class PlayerLife : MonoBehaviour
     public void DealDamage(int damageValue)
     {
 
-        // Deduct health and check if the player is dead
+        // Deduct health and check if the player is dead, then plays a hurt sound
         playerHp -= damageValue;
         playerHurt.Play();
 
@@ -58,26 +58,21 @@ public class PlayerLife : MonoBehaviour
         {
             isPlayerDed = true;
             gameManager.GameOver();
-            Debug.Log("Player has " + playerHp + " HP left. Player is dead.");
 
             // Ensure the death sequence is delayed slightly to finish all actions
             StartCoroutine(HandlePlayerDeath());
-        }
-        else if (playerHp > 0)
-        {
-            Debug.Log("Player has " + playerHp + " HP left.");
         }
     }
 
     private IEnumerator HandlePlayerDeath()
     {
-        // Delay briefly to ensure all logs and VFX can happen before stopping the game
+        // Short delay for good measure
         yield return new WaitForSeconds(0.1f);
 
         // Stop the game after the brief delay
         GameManager.isGameOn = false;
         isPlayerDed = true;
         playerDed.Play();
-        Time.timeScale = 0;
+        Time.timeScale = 0; //Stops the timer to prevent the enemies from further spawning
     }
 }

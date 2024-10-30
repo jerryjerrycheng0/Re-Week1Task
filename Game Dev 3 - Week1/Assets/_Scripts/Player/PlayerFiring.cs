@@ -36,7 +36,7 @@ public class PlayerFiring : MonoBehaviour
     {
         isFiring = true; // Set firing flag to true
 
-        shootSound.Play();
+        shootSound.Play(); // Plays sounds when shooting
 
         // The for loop will make sure we can shoot from both locations at once
         for (int i = 0; i < gunPositions.Length; i++)

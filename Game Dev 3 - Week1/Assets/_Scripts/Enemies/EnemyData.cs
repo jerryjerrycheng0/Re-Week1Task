@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class EnemyData : ScriptableObject
 {
-    public Sprite shipSprite;
-    public float shipSpeed;
-    public int shipHP;
-    public float fireRateEnemy;
-    public int bulletDamage;
-    public GameObject bulletPrefab;
-    public enum MovementType
+    public Sprite shipSprite; //Appearance of the ship
+    public float shipSpeed; //Speed of the ship
+    public int shipHP; //Health of the ship
+    public float fireRateEnemy; //Fire rate of the ship
+    public int bulletDamage; //Damage of the ship's bullet
+    public GameObject bulletPrefab; //Prefab of the bullet
+    public enum MovementType //Activates a menu to select the way a ship moves
     {
-        Straight,
-        Circular,
-        Sway
+        Straight, //Moves in a straight line along the y axis
+        Circular, //Spins a few times, then goes straight down
+        Sway //Occasionally moves left and right when descending
     }
-    public MovementType movementType;
+    public MovementType movementType; //The way the ship moves
 }

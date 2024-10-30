@@ -52,10 +52,9 @@ public class EnemyLife : MonoBehaviour
 
         public void RemoveHp(int hpToRemove)
     {
-        //Destroys the enemyShip if the hit brings it tp 0 or below
+        //Destroys the enemyShip if the hit brings it to 0 or below
         if ((enemyHp - hpToRemove) <= 0)
         {
-            //You can add a timer to it by putting a comma and a float variable Example:Destroy(gameObject, 0.5f)
             Destroy(gameObject);
         }
         else

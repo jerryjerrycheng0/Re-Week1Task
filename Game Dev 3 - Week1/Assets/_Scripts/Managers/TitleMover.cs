@@ -29,6 +29,7 @@ public class TitleMover : MonoBehaviour
     {
         //Wait
         yield return new WaitForSeconds(2f);
+        //Drumroll when the title moves down
         drumRoll.Play();
         //The title moves down
         transform.DOMove(endPositionTransform.position, moveDuration);
@@ -36,6 +37,7 @@ public class TitleMover : MonoBehaviour
         yield return new WaitForSeconds(moveDuration - 0.1f);
         //The tile scale punches for a cool effect
         transform.DOPunchScale(punchStrenght, 1f);
+        //Cue Start sound
         startSound.Play();
         //Wait
         yield return new WaitForSeconds(moveDuration);
